@@ -47,15 +47,16 @@ const Users = () => {
         setSortOrder(order);
     };
 
-    // const sortUsers = () => {
-    //     const column = columns.find((column) => column.name === sortColumn);
-    //     const sortedUsers = _.orderBy(users, column.path, sortOrder);
-    //     return sortedUsers;
-    // };
+    const sortUsers = () => {
+        const column = columns.find((column) => column.name === sortColumn);
+        const sortedUsers = _.orderBy(users, column.path, sortOrder);
+        return sortedUsers;
+    };
 
     const paginateUsers = () => {
+        const sortedUsers = sortUsers();
         const offset = (currentPage - 1) * limit;
-        const paginatedUsers = _.drop(users, offset).slice(0, limit);
+        const paginatedUsers = _.drop(sortedUsers, offset).slice(0, limit);
         return paginatedUsers;
     };
     useEffect(() => {
